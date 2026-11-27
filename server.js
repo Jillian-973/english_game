@@ -30,6 +30,11 @@ const app = express();
 // On Vercel, public/ is served by the CDN; locally Express serves the same files.
 if (isMain) app.use(express.static(fileURLToPath(new URL('./public', import.meta.url))));
 
+// The root URL (printed in the QR code) is routed to this function on Vercel,
+// so the page itself is sent from here.
+const indexPage = fileURLToPath(new URL('./public/index.html', import.meta.url));
+app.get('/', (req, res) => res.sendFile(indexPage));
+
 app.use(createApp({ cards, store: createStore() }));
 
 if (isMain) {
