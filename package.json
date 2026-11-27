@@ -11,10 +11,14 @@
   "scripts": {
     "dev": "node --watch --env-file-if-exists=.env server.js",
     "start": "node --env-file-if-exists=.env server.js",
-    "test": "node --test"
+    "test": "node --test",
+    "qr": "node scripts/generate-qr.js"
   },
   "dependencies": {
     "express": "^5.3.0",
     "mongodb": "^6.22.0"
+  },
+  "devDependencies": {
+    "qrcode": "^1.5.4"
   }
 }
