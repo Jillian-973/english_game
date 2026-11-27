@@ -6,7 +6,7 @@
   "type": "module",
   "main": "server.js",
   "engines": {
-    "node": ">=20.12"
+    "node": "24.x"
   },
   "scripts": {
     "dev": "node --watch --env-file-if-exists=.env server.js",

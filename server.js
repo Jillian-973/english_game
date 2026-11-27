@@ -1,7 +1,8 @@
 /**
- * Entry point. Vercel imports the default export (Express zero-config);
- * `npm run dev` runs this file directly and starts a local server.
+ * Entry point. Vercel imports the default export (Express zero-config: this file must
+ * import express itself); `npm run dev` runs this file directly and starts a local server.
  */
+import express from 'express';
 import { fileURLToPath } from 'node:url';
 import { createApp } from './src/create-app.js';
 import { buildCardIndex } from './src/game/cards.js';
@@ -24,12 +25,12 @@ function createStore() {
   return new MemorySessionStore();
 }
 
-const app = createApp({
-  cards,
-  store: createStore(),
-  // On Vercel, public/ is served by the CDN; locally Express serves the same files.
-  staticDir: isMain ? fileURLToPath(new URL('./public', import.meta.url)) : undefined,
-});
+const app = express();
+
+// On Vercel, public/ is served by the CDN; locally Express serves the same files.
+if (isMain) app.use(express.static(fileURLToPath(new URL('./public', import.meta.url))));
+
+app.use(createApp({ cards, store: createStore() }));
 
 if (isMain) {
   const port = Number(process.env.PORT) || 3000;

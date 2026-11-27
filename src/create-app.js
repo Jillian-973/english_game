@@ -11,12 +11,11 @@ import { errorHandler, notFound } from './http/errors.js';
  * @param {{
  *   cards: Map<string, object>,
  *   store: object,
- *   staticDir?: string | URL,   // serve the front-end locally (Vercel serves public/ itself)
  *   now?: () => Date,
  *   newId?: () => string,
  * }} options
  */
-export function createApp({ cards, store, staticDir, now, newId }) {
+export function createApp({ cards, store, now, newId }) {
   const app = express();
   const sessions = new SessionService({ store, cards, now, newId });
 
@@ -26,8 +25,6 @@ export function createApp({ cards, store, staticDir, now, newId }) {
   app.use('/api/cards', cardsRouter(cards));
   app.use('/api/sessions', sessionsRouter(sessions));
   app.use('/api', (req, res, next) => next(notFound('Route not found.')));
-
-  if (staticDir) app.use(express.static(staticDir));
 
   app.use(errorHandler);
   return app;
