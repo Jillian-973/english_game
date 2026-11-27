@@ -37,10 +37,6 @@ export class Modal {
     window.addEventListener('popstate', () => this.#onPopState());
   }
 
-  get isOpen() {
-    return this.#dialog.open;
-  }
-
   show(view) {
     const dialog = this.#dialog;
     this.#view = view;

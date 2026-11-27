@@ -20,7 +20,7 @@ class SafeHtml {
 
 const ESCAPES = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
 
-export function escapeHtml(value) {
+function escapeHtml(value) {
   return String(value).replace(/[&<>"']/g, (char) => ESCAPES[char]);
 }
 

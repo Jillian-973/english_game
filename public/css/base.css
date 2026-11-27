@@ -28,17 +28,11 @@ img { display: block; }
 
 :focus-visible { outline: 2px solid var(--color-cyan); outline-offset: 2px; }
 
-.visually-hidden {
-  position: absolute; width: 1px; height: 1px; overflow: hidden;
-  clip: rect(0 0 0 0); white-space: nowrap;
-}
-
 /* Color utilities */
 .text-green  { color: var(--color-green); }
 .text-orange { color: var(--color-orange); }
 .text-yellow { color: var(--color-yellow); }
 .text-pink   { color: var(--color-pink); }
-.text-cyan   { color: var(--color-cyan); }
 .text-tan    { color: var(--color-tan); }
 .text-grey   { color: var(--color-grey-light); }
 

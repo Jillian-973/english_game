@@ -121,7 +121,7 @@ export function createCardView({ deck, card, state = EMPTY_STATE, onBack, onHint
     render() {
       return html`
         ${modalBar({ colorClass: DECKS[deck].colorClass, withBack: true })}
-        <article class="card ${deck === 'fuel' ? 'card--fuel' : ''} ${current.result ? 'is-answered' : ''}">
+        <article class="card ${deck === 'fuel' ? 'card--fuel' : ''}">
           ${deck === 'fuel' ? fuelWave : ''}
           ${renderHead(deck, card)}
           ${renderCode(card)}
