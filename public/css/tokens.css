@@ -1,0 +1,58 @@
+/* Design tokens — taken from the author's charter (docs/design). */
+
+@font-face {
+  font-family: "Jersey 10";
+  src: url("../fonts/jersey-10.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Colors */
+  --color-bg-page: #15181e;
+  --color-bg-dark: #22262e;
+  --color-bg-game: #4a5062;
+  --color-bg-muted: #2e333f;
+  --color-ink: #22262e;
+  --color-line: #3d4250;
+  --color-white: #f3f3f3;
+  --color-grey-light: #a9afbb;
+  --color-grey-text: #b7bcc7;
+  --color-grey-dim: #5f6472;
+  --color-cyan: #2bb8c4;
+  --color-green: #5fce5f;
+  --color-pink: #ef5670;
+  --color-orange: #d98b43;
+  --color-tan: #d39b6a;
+  --color-yellow: #fbbf24;
+  --color-brown-dark: #2c1810;
+  --color-gauge-empty: #3a3f4e;
+  --color-gauge-separator: #c9ccd3;
+
+  /* Typography — one font for every text */
+  --font: "Jersey 10", ui-monospace, monospace;
+  --text-sm: 17px;
+  --text-md: 20px;
+  --text-lg: 24px;
+  --text-xl: 26px;
+  --text-2xl: 32px;
+  --text-title: 65px;
+
+  /* Layout */
+  --app-max-width: 480px;
+  --gutter: 16px;
+  /* One gauge cell = one action button = the gap between two buttons */
+  --cell: clamp(40px, calc((100dvh - 290px) / 10), 52px);
+
+  /* Shapes */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 28px;
+  --shadow-hard: 3px 8px 5px rgb(0 0 0 / 55%);
+  --shadow-soft: 0 12px 24px rgb(0 0 0 / 40%);
+  --shadow-btn: 0 5px 8px rgb(0 0 0 / 35%);
+
+  /* Motion */
+  --ease-bounce: cubic-bezier(.3, 1.4, .6, 1);
+}

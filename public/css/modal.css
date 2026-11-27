@@ -1,0 +1,244 @@
+/* Modal shell (<dialog>) and the panels rendered inside it:
+   deck list, start form, end confirmation, recap. */
+
+/* ---------- Dialog shell ---------- */
+.modal {
+  width: 100%;
+  max-width: var(--app-max-width);
+  height: 100dvh;
+  max-height: none;
+  margin: 0 auto;
+  padding: 24px var(--gutter);
+  border: 0;
+  background: transparent;
+  color: inherit;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.modal[open] {
+  display: flex;
+  flex-direction: column;
+  animation: fade-in .18s ease;
+}
+.modal::backdrop {
+  background: rgb(70 76 94 / 35%);
+  backdrop-filter: blur(5px);
+}
+
+/* Content is vertically centred, and scrolls from the top when taller than the window */
+.modal__content { margin-block: auto; }
+
+/* Fit variant: the modal never exceeds the window, only the list scrolls */
+.modal--fit { overflow: hidden; }
+.modal--fit .modal__content { display: flex; flex-direction: column; min-height: 0; }
+.modal--fit .panel { display: flex; flex-direction: column; min-height: 0; }
+
+/* Plain variant: no backdrop (start screen shows its own background) */
+.modal--plain::backdrop { background: transparent; backdrop-filter: none; }
+
+/* ---------- Top bar (back / close) ---------- */
+.modal__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 44px;
+  margin-bottom: 18px;
+  padding: 0 6px;
+}
+.modal__close {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 4px;
+  border: 0;
+  background: none;
+}
+.modal__close svg { width: 36px; height: 36px; }
+.modal__back {
+  min-height: 48px;
+  padding: 8px 4px;
+  border: 0;
+  background: none;
+  font-size: var(--text-lg);
+  color: var(--color-grey-light);
+}
+
+/* ---------- Panel ---------- */
+.panel {
+  padding: 26px 22px 30px;
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-dark);
+  box-shadow: var(--shadow-soft);
+  animation: pop-in .2s ease;
+}
+.panel__title {
+  margin-bottom: 24px;
+  text-align: center;
+  font-size: var(--text-2xl);
+}
+
+/* ---------- Deck list ---------- */
+.search {
+  width: 100%;
+  height: 50px;
+  margin-bottom: 12px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--color-bg-game);
+  font-size: 22px;
+  outline: none;
+}
+.search::placeholder { color: #a6abb8; }
+.search:focus { box-shadow: 0 0 0 2px var(--color-cyan); }
+
+.deck-list {
+  flex: 1;
+  min-height: 0;
+  margin: 0 -10px 0 0;
+  padding: 0 10px 0 0;
+  list-style: none;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.deck-list::-webkit-scrollbar { width: 6px; }
+.deck-list::-webkit-scrollbar-thumb { background: var(--color-bg-game); border-radius: 3px; }
+
+.deck-list__empty { padding: 20px 0; color: var(--color-grey-dim); }
+
+.deck-row {
+  display: block;
+  width: 100%;
+  padding: 20px 0 16px;
+  border: 0;
+  border-bottom: 3px solid var(--color-bg-game);
+  background: none;
+  text-align: left;
+  font-size: 22px;
+  line-height: 1.45;
+}
+.deck-row__id { color: var(--color-orange); }
+.deck-row:hover .deck-row__text,
+.deck-row:focus-visible .deck-row__text { color: var(--color-cyan); }
+.deck-row__meta { display: flex; gap: 8px; margin-top: 8px; font-size: var(--text-sm); }
+.deck-row.is-answered { opacity: .42; }
+.deck-row.is-answered .deck-row__text { text-decoration: line-through; text-decoration-thickness: 1px; }
+
+.badge {
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  background: #343a48;
+  color: var(--color-grey-light);
+}
+.badge--hints { color: var(--color-cyan); }
+.badge--right { color: var(--color-green); }
+.badge--false { color: var(--color-pink); }
+
+/* ---------- Start form ---------- */
+.start {
+  padding: 30px 0;
+  border-radius: 30px;
+  background: var(--color-bg-game);
+  box-shadow: 0 10px 20px rgb(0 0 0 / 35%);
+  animation: pop-in .25s ease;
+}
+.start .panel__title { margin-bottom: 48px; }
+.start__label {
+  display: block;
+  margin: 0 30px 12px;
+  font-size: var(--text-xl);
+  color: var(--color-cyan);
+}
+.start__input {
+  display: block;
+  width: calc(100% - 60px);
+  height: 64px;
+  margin: 0 30px;
+  padding: 0 24px;
+  border: 0;
+  border-radius: 40px;
+  background: var(--color-white);
+  box-shadow: 0 6px 8px rgb(0 0 0 / 35%);
+  color: var(--color-ink);
+  font-size: var(--text-lg);
+  outline: none;
+}
+.start__input:focus { box-shadow: 0 0 0 3px var(--color-cyan), 0 6px 8px rgb(0 0 0 / 35%); }
+.start__submit-row {
+  display: flex;
+  align-items: center;
+  margin-top: 64px;
+  padding-right: 30px;
+}
+.start__submit-row::before { content: ""; flex: 1; height: 4px; background: var(--color-tan); }
+.start__submit {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  margin-left: -2px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-tan);
+  box-shadow: 0 4px 8px rgb(0 0 0 / 35%);
+}
+.start__submit img { width: 44px; margin-left: 4px; }
+
+/* ---------- Buttons used in panels ---------- */
+.btn-group { display: grid; gap: 14px; }
+.btn {
+  height: 54px;
+  border: 0;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-btn);
+  font-size: var(--text-lg);
+}
+.btn--pink { background: var(--color-pink); color: var(--color-ink); }
+.btn--grey { background: var(--color-bg-game); color: var(--color-grey-light); }
+.btn--tan  { background: var(--color-tan); color: var(--color-ink); }
+.btn--block { width: 100%; }
+
+/* ---------- End confirmation ---------- */
+.confirm__text {
+  margin: 0 4px 28px;
+  text-align: center;
+  font-size: var(--text-lg);
+  line-height: 1.45;
+  color: var(--color-grey-light);
+}
+
+/* ---------- Recap ---------- */
+.recap__head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.recap__caption { display: block; font-size: 16px; color: #7d8394; }
+.recap__name { font-size: var(--text-lg); color: var(--color-cyan); }
+.recap__fuel { text-align: right; }
+.recap__fuel-value { display: block; font-size: 48px; line-height: 1; color: var(--color-tan); }
+.recap__list {
+  max-height: 46dvh;
+  margin: 0 0 24px;
+  padding: 0;
+  border-left: 2px solid var(--color-line);
+  list-style: none;
+  overflow-y: auto;
+}
+.recap__item {
+  display: grid;
+  grid-template-columns: 34px 1fr auto;
+  align-items: baseline;
+  gap: 8px;
+  padding: 8px 0;
+  font-size: 19px;
+}
+.recap__line-no { text-align: center; font-size: var(--text-sm); color: #5a6070; }
+.recap__label--question { color: var(--color-green); }
+.recap__label--fuel { color: var(--color-tan); }
+.recap__delta--neg  { color: var(--color-pink); }
+.recap__delta--pos  { color: var(--color-green); }
+.recap__delta--zero { color: var(--color-grey-light); }

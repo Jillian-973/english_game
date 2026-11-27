@@ -1,0 +1,124 @@
+/* Game screen: fuel gauge and action buttons. */
+
+.game {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 22px;
+  padding: 34px var(--gutter) 0;
+}
+
+.game__label {
+  grid-column: 1 / -1;
+  margin-bottom: 10px;
+  font-size: var(--text-xl);
+  color: var(--color-cyan);
+}
+
+/* ---------- Gauge ---------- */
+.gauge {
+  --level: 10;
+  position: relative;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-hard);
+}
+
+.gauge__cell {
+  display: flex;
+  align-items: center;
+  height: var(--cell);
+  padding-left: 10px;
+  border-bottom: 2px solid var(--color-gauge-separator);
+  background: var(--color-tan);
+  color: var(--color-ink);
+  font-size: 19px;
+  transition: background .35s ease, color .35s ease;
+}
+.gauge__cell:first-of-type { border-radius: var(--radius-md) var(--radius-md) 0 0; }
+.gauge__cell:last-of-type  { border-radius: 0 0 var(--radius-md) var(--radius-md); border-bottom: 0; }
+.gauge__cell.is-empty   { background: var(--color-gauge-empty); color: #6b7183; }
+.gauge__cell.is-current { background: var(--color-grey-light); }
+
+/* The drops follow the current level */
+.gauge__drops {
+  position: absolute;
+  z-index: 1;
+  right: -18px;
+  top: calc((10 - var(--level)) * var(--cell) - 40px);
+  width: 86px;
+  pointer-events: none;
+  transition: top .45s var(--ease-bounce);
+}
+
+/* ---------- Action buttons ---------- */
+/* Rows aligned on the gauge cells: one button every other cell. */
+.actions {
+  display: grid;
+  grid-template-rows: repeat(10, var(--cell));
+}
+.actions > :nth-child(1) { grid-row: 1; }
+.actions > :nth-child(2) { grid-row: 3; }
+.actions > :nth-child(3) { grid-row: 5; }
+.actions > :nth-child(4) { grid-row: 7; }
+.actions > :nth-child(5) { grid-row: 9; }
+
+.action-btn {
+  position: relative;
+  overflow: hidden;
+  padding: 0 26px 0 8px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-dark);
+  box-shadow: var(--shadow-hard);
+  font-size: clamp(20px, 6vw, var(--text-xl));
+  white-space: nowrap;
+  transition: transform .08s;
+}
+.action-btn:active:not(:disabled) { transform: translateY(2px); }
+.action-btn:disabled { opacity: .5; }
+
+.action-btn__corner {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 40px;
+  height: 40px;
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+.action-btn__corner img {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  width: auto;
+  height: 17px;
+}
+.action-btn__glyph {
+  position: absolute;
+  right: 5px;
+  bottom: 0;
+  font-size: 20px;
+  color: var(--color-ink);
+}
+
+.action-btn--question { color: var(--color-green); }
+.action-btn--question .action-btn__corner { background: var(--color-green); }
+
+.action-btn--fuel { color: var(--color-tan); }
+.action-btn--fuel .action-btn__corner { background: var(--color-tan); }
+
+.action-btn--event { color: var(--color-orange); }
+.action-btn--event .action-btn__corner { background: var(--color-orange); }
+.action-btn--event[hidden] { display: block; visibility: hidden; }
+
+.action-btn--undo { background: var(--color-bg-muted); color: var(--color-grey-light); }
+.action-btn--undo .action-btn__corner { background: var(--color-cyan); }
+
+.action-btn--end {
+  padding: 0;
+  background: var(--color-pink);
+  color: var(--color-ink);
+}
