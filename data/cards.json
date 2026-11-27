@@ -1,0 +1,195 @@
+[
+  {
+    "id": "001", "deck": "movement", "level": "easy",
+    "question": "What is the purpose of the HTML <h1> tag?",
+    "options": ["Create a paragraph.", "Define the main heading of a page.", "Add an image.", "Create a hyperlink."],
+    "answer": "B",
+    "hints": ["It displays text.", "It is used for headings.", "It is generally the main heading of a page."],
+    "wrongPenalty": 1
+  },
+  {
+    "id": "002", "deck": "movement", "level": "easy",
+    "question": "What is the purpose of the CSS color property?",
+    "options": ["Change the background color.", "Change the border color.", "Change the transparency of an element.", "Change the text color."],
+    "answer": "D",
+    "hints": ["It is a CSS property.", "It changes the appearance of text.", "It lets you choose colors such as red, blue, or green."],
+    "wrongPenalty": 1
+  },
+  {
+    "id": "003", "deck": "movement", "level": "easy",
+    "question": "What is the function of the HTML <a> tag?",
+    "options": ["Create a hyperlink.", "Display an image.", "Create a form.", "Add an animation."],
+    "answer": "A",
+    "hints": ["It makes an element interactive.", "It is often used to navigate the Internet.", "It usually uses the href attribute."],
+    "wrongPenalty": 1
+  },
+  {
+    "id": "004", "deck": "movement", "level": "easy",
+    "question": "What is the purpose of the CSS background-color property?",
+    "options": ["Change the text color.", "Add a background image.", "Define the background color of an element.", "Change the border color."],
+    "answer": "C",
+    "hints": ["It affects the background of an element.", "It changes the appearance of an element.", "It can give a background color to a div."],
+    "wrongPenalty": 1
+  },
+  {
+    "id": "005", "deck": "movement", "level": "easy",
+    "question": "What is the purpose of the HTML <img> tag?",
+    "options": ["Insert a video.", "Create an interactive gallery.", "Add an audio file.", "Display an image on a web page."],
+    "answer": "D",
+    "hints": ["It adds a visual element.", "It uses the src attribute.", "It displays a photo or an illustration."],
+    "wrongPenalty": 1
+  },
+  {
+    "id": "006", "deck": "movement", "level": "easy",
+    "question": "What is the function of the CSS font-size property?",
+    "options": ["Change the font family.", "Change the text size.", "Change the font weight.", "Change the spacing between letters."],
+    "answer": "B",
+    "hints": ["It affects text.", "It changes the dimensions of text.", "Its value can be expressed in pixels or rem."],
+    "wrongPenalty": 1
+  },
+  {
+    "id": "007", "deck": "movement", "level": "easy",
+    "question": "What is the purpose of the HTML <ul> tag?",
+    "options": ["Create a numbered list.", "Underline text.", "Create an unordered list.", "Create a table."],
+    "answer": "C",
+    "hints": ["It groups multiple items.", "It is used to create a list.", "Items usually have bullet points."],
+    "wrongPenalty": 1
+  },
+  {
+    "id": "008", "deck": "movement", "level": "easy",
+    "question": "What is the purpose of the HTML <p> tag?",
+    "options": ["Create a heading.", "Create a paragraph of text.", "Insert an image.", "Create a button."],
+    "answer": "B",
+    "hints": ["It is used to display text.", "It separates blocks of text.", "It represents a paragraph."],
+    "wrongPenalty": 1
+  },
+  {
+    "id": "025", "deck": "movement", "level": "easy",
+    "question": "What is the purpose of the CSS text-align property?",
+    "options": ["Change the font family.", "Align text horizontally.", "Change the background.", "Add a border."],
+    "answer": "B",
+    "hints": ["It controls the position of text.", "It can align text to the left or right.", "Common values include left, center and right."],
+    "wrongPenalty": 1
+  },
+  {
+    "id": "026", "deck": "movement", "level": "easy",
+    "question": "What is the purpose of the CSS border property?",
+    "options": ["Change the text size.", "Add space inside an element.", "Change the element's opacity.", "Add a border around an element."],
+    "answer": "D",
+    "hints": ["It changes the appearance of an element.", "It can define thickness, style and color.", "It creates a visible outline around an element."],
+    "wrongPenalty": 1
+  },
+  {
+    "id": "035", "deck": "movement", "level": "medium",
+    "question": "What is the function of the CSS display: flex declaration?",
+    "options": ["Organize and align elements using Flexbox.", "Automatically overlap elements.", "Hide elements inside a container.", "Organize elements using CSS Grid."],
+    "answer": "A",
+    "hints": ["It controls the layout of elements.", "It arranges elements in rows or columns.", "It works with a parent container and its children."],
+    "wrongPenalty": 2
+  },
+  {
+    "id": "039", "deck": "movement", "level": "medium",
+    "question": "What is the purpose of the CSS :hover pseudo-class?",
+    "options": ["Apply styles when the pointer moves over an element.", "Apply styles when an element is clicked.", "Apply styles when a page loads.", "Apply styles when an input receives focus."],
+    "answer": "A",
+    "hints": ["It changes the appearance of an element.", "It is related to mouse interaction.", "It activates when the pointer moves over an element."],
+    "wrongPenalty": 2
+  },
+  {
+    "id": "040", "deck": "movement", "level": "medium",
+    "question": "What is the function of the HTML <form> tag?",
+    "options": ["Format text.", "Create a data table.", "Structure a navigation menu.", "Create a form to collect and submit data."],
+    "answer": "D",
+    "hints": ["It collects information.", "It can contain input fields and buttons.", "It is often used for registration and login."],
+    "wrongPenalty": 2
+  },
+  {
+    "id": "042", "deck": "movement", "level": "medium",
+    "question": "What is the purpose of the HTML id attribute?",
+    "options": ["Give an element a unique identifier.", "Change the element's background.", "Create a hyperlink automatically.", "Add a new HTML document."],
+    "answer": "B",
+    "hints": ["It is used with links.", "It controls where the linked page opens.", "It usually opens the destination in a new tab."],
+    "wrongPenalty": 2
+  },
+  {
+    "id": "072", "deck": "movement", "level": "hard",
+    "question": "What is the purpose of the HTML data-* attribute?",
+    "options": ["Automatically send data to a server.", "Store custom data in an HTML element.", "Connect an HTML page to a database.", "Automatically import a JavaScript file."],
+    "answer": "B",
+    "hints": ["It adds custom information to an HTML element.", "It can be used with JavaScript.", "Its value can be accessed using element.dataset."],
+    "wrongPenalty": 3
+  },
+  {
+    "id": "077", "deck": "movement", "level": "hard",
+    "question": "What is the purpose of the CSS ::after pseudo-element?",
+    "options": ["Hide the last child of an element.", "Change the element's width.", "Insert generated content after an element's content.", "Create a new HTML element."],
+    "answer": "C",
+    "hints": ["It is a CSS pseudo-element.", "It can add decorative elements.", "It is commonly used with the content property."],
+    "wrongPenalty": 3
+  },
+  {
+    "id": "081", "deck": "movement", "level": "hard",
+    "question": "What is the purpose of the CSS @keyframes rule?",
+    "options": ["Define HTML page sections.", "Change the font family.", "Define the stages of a CSS animation.", "Create a responsive grid."],
+    "answer": "C",
+    "hints": ["It is related to CSS animations.", "It defines how an element changes over time.", "It uses percentage values or from and to to describe animation stages."],
+    "wrongPenalty": 3
+  },
+  {
+    "id": "095", "deck": "movement", "level": "hard",
+    "question": "What is the purpose of the HTML <picture> element?",
+    "options": ["Provide multiple image sources for responsive images.", "Create an image editing application.", "Add captions to videos.", "Automatically resize all HTML elements."],
+    "answer": "A",
+    "hints": ["It is used to display images.", "It can contain <source> elements and an <img> element.", "It allows different images to be selected based on media conditions or formats."],
+    "wrongPenalty": 3
+  },
+
+  {
+    "id": "016", "deck": "fuel", "level": "easy",
+    "question": "What is the purpose of the CSS overflow property?",
+    "options": ["Change the element's color.", "Define the font family.", "Control what happens when content exceeds an element's box.", "Change the element's position."],
+    "answer": "C",
+    "hints": ["It manages content that does not fit.", "It can hide or display overflowing content.", "Common values include hidden, visible and auto."],
+    "wrongPenalty": 1, "fuelReward": 1
+  },
+  {
+    "id": "017", "deck": "fuel", "level": "easy",
+    "question": "What is the purpose of the CSS cursor property?",
+    "options": ["Change the mouse pointer's appearance.", "Change the text color.", "Move an element.", "Create an animation."],
+    "answer": "A",
+    "hints": ["It changes how the pointer looks.", "It can indicate that an element is clickable.", "A common value is pointer."],
+    "wrongPenalty": 1, "fuelReward": 1
+  },
+  {
+    "id": "015", "deck": "fuel", "level": "medium",
+    "question": "What is the purpose of the HTML id attribute?",
+    "options": ["Give an element a unique identifier.", "Change the element's background.", "Create a hyperlink automatically.", "Add a new HTML document."],
+    "answer": "A",
+    "hints": ["It is an HTML attribute.", "It helps identify a specific element.", "It should be unique within the document."],
+    "wrongPenalty": 2, "fuelReward": 2
+  },
+  {
+    "id": "018", "deck": "fuel", "level": "medium",
+    "question": "What is the purpose of the HTML defer attribute on a script?",
+    "options": ["Execute the script immediately before HTML parsing.", "Prevent the script from loading.", "Convert JavaScript into CSS.", "Download the script while parsing HTML and execute it after parsing finishes."],
+    "answer": "D",
+    "hints": ["It is used with the <script> element.", "It helps manage JavaScript loading.", "It allows the HTML document to be parsed before the script executes."],
+    "wrongPenalty": 2, "fuelReward": 2
+  },
+  {
+    "id": "050", "deck": "fuel", "level": "hard",
+    "question": "What is the purpose of the CSS minmax() function?",
+    "options": ["Define a minimum and maximum size for a grid track.", "Calculate the average size of an image.", "Change the font size automatically.", "Hide grid columns."],
+    "answer": "A",
+    "hints": ["It is commonly used with CSS Grid.", "It defines a range of possible sizes.", "It can be used inside grid-template-columns."],
+    "wrongPenalty": 3, "fuelReward": 3
+  },
+  {
+    "id": "036", "deck": "fuel", "level": "hard",
+    "question": "What is the purpose of the CSS @font-face rule?",
+    "options": ["Change the font weight of all elements.", "Remove the default browser font.", "Create a text animation.", "Define and load a custom font for a website."],
+    "answer": "D",
+    "hints": ["It is related to typography.", "It allows developers to use external font files.", "It can define a font using formats such as WOFF or WOFF2."],
+    "wrongPenalty": 3, "fuelReward": 3
+  }
+]
