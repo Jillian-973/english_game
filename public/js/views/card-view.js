@@ -73,10 +73,20 @@ function renderHints(state, hintsLeft) {
     ${canReveal ? html`<button class="hint-btn" type="button" data-hint>Reveal hint ${state.hintsRevealed.length + 1} <span class="hint-btn__cost">(${formatDelta(-1)})</span></button>` : ''}`;
 }
 
+/**
+ * Points shown on the answer buttons (labels only: the server applies them).
+ * Question card: Right -1, False -wrongPenalty. Refuel card: Right +fuelReward, False 0.
+ */
+function answerPoints(deck, card) {
+  return deck === 'fuel'
+    ? { correct: card.fuelReward, wrong: 0 }
+    : { correct: -1, wrong: -card.wrongPenalty };
+}
+
 function renderAnswers(deck, card, state) {
   const letter = card.answer;
   const text = card.options[OPTION_LETTERS.indexOf(letter)];
-  const rightPoints = deck === 'fuel' ? formatDelta(card.fuelReward) : null;
+  const points = answerPoints(deck, card);
 
   return html`
     <p class="answer">${letter}. ${text}</p>
@@ -84,10 +94,10 @@ function renderAnswers(deck, card, state) {
       ? html`<p class="answer__result answer__result--${state.result}">${RESULT_LABELS[state.result]}</p>`
       : html`<div class="answer-btns">
           <button class="answer-btn answer-btn--right" type="button" data-answer="correct">
-            Right ${rightPoints ? html`<span class="answer-btn__points">(${rightPoints})</span>` : ''}
+            Right <span class="answer-btn__points">(${formatDelta(points.correct)})</span>
           </button>
           <button class="answer-btn answer-btn--false" type="button" data-answer="wrong">
-            False <span class="answer-btn__points">(${formatDelta(-card.wrongPenalty)})</span>
+            False <span class="answer-btn__points">(${formatDelta(points.wrong)})</span>
           </button>
         </div>`}`;
 }

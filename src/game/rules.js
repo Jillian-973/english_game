@@ -7,6 +7,8 @@ import { cardKey } from './cards.js';
 export const GAUGE_MIN = 0;
 export const GAUGE_MAX = 10;
 export const HINT_COST = 1;
+/** A right answer on a Question (movement) card still uses fuel. */
+export const MOVEMENT_CORRECT_COST = 1;
 export const ACTION_TYPES = Object.freeze(['hint', 'correct', 'wrong']);
 
 /** Business rule violation. `code` is stable and can be tested; the API maps it to 409. */
@@ -56,10 +58,16 @@ export function deriveCardStates(events) {
   return states;
 }
 
+/**
+ * Points of an action before clamping:
+ *   hint:    -1 on any card
+ *   correct: movement -1, fuel +fuelReward
+ *   wrong:   movement -wrongPenalty, fuel 0
+ */
 function nominalDelta(card, type) {
   if (type === 'hint') return -HINT_COST;
-  if (type === 'wrong') return -card.wrongPenalty;
-  return card.deck === 'fuel' ? card.fuelReward : 0; // correct
+  if (card.deck === 'fuel') return type === 'correct' ? card.fuelReward : 0;
+  return type === 'correct' ? -MOVEMENT_CORRECT_COST : -card.wrongPenalty;
 }
 
 /**

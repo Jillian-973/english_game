@@ -65,20 +65,20 @@ Garder le nombre de dépendances au strict minimum : `express`, `mongodb`, `qrco
 - Elle ne dépasse **jamais 10** (un gain Fuel au-delà est simplement perdu).
 
 ### 4.2 Cartes
-Deux piles : `movement` et `fuel`. Chaque indice coûte toujours **1 point**. Les autres valeurs sont propres à chaque carte (entiers de **1 à 3**) :
+Deux piles : `movement` et `fuel`. Chaque indice coûte toujours **1 point**, et une bonne réponse sur une carte Movement coûte toujours **1 point**. `wrongPenalty` (cartes Movement) et `fuelReward` (cartes Fuel) sont propres à chaque carte (entiers de **1 à 3**) :
 
 | Action | Carte Movement | Carte Fuel |
 |---|---|---|
 | `hint` (Indice, par clic) | `-1` | `-1` |
-| `correct` (Bonne réponse) | `0` | `+fuelReward` |
-| `wrong` (Mauvaise réponse) | `-wrongPenalty` | `-wrongPenalty` |
+| `correct` (Bonne réponse) | `-1` | `+fuelReward` |
+| `wrong` (Mauvaise réponse) | `-wrongPenalty` | `0` |
 
 ### 4.3 Enchaînement sur une carte
 - Une carte peut recevoir **jusqu'à 3 `hint`** (un par clic, chacun à `-1`), et seulement **avant** d'être répondue.
 - Chaque clic révèle **l'indice suivant** de la carte (indice 1, puis 2, puis 3). Une carte peut avoir moins de 3 indices : le nombre maximal de clics est le nombre d'indices de la carte (3 au maximum). Le bouton Hint est désactivé quand tous les indices sont révélés.
 - Une carte reçoit **une seule réponse** (`correct` ou `wrong`).
-- `hint` ×N puis `wrong` → tous les malus **s'additionnent** (N événements `hint` + un événement `wrong`).
-- `hint` ×N puis `correct` → seuls les N malus d'indice s'appliquent (+ le gain Fuel le cas échéant).
+- `hint` ×N puis `wrong` → les malus **s'additionnent** (N événements `hint` + un événement `wrong`, qui vaut `0` sur une carte Fuel).
+- `hint` ×N puis `correct` → les N malus d'indice, plus `-1` sur une carte Movement ou `+fuelReward` sur une carte Fuel.
 - Une carte répondue est **grisée** et ne peut plus recevoir d'action (les `hint` seuls ne la grisent pas).
 - Le **texte d'un indice** n'est affiché qu'après avoir été révélé ; les indices déjà révélés restent visibles quand on rouvre la carte.
 - Toute action sur une session terminée est refusée.
@@ -121,7 +121,6 @@ Le contenu provient d'un Google Doc de l'auteur, à convertir dans ce format. Fo
     "deck": "fuel",
     "question": "Sample fuel question?",
     "hints": ["First hint.", "Second hint.", "Third hint."],
-    "wrongPenalty": 1,
     "fuelReward": 3
   }
 ]
@@ -130,7 +129,7 @@ Le contenu provient d'un Google Doc de l'auteur, à convertir dans ce format. Fo
 - `id` : **chaîne de 3 chiffres** (`"001"`, `"042"`…), exactement comme imprimé sur les cartes. Toujours la stocker en chaîne pour garder les zéros initiaux.
 - Un même id peut exister dans les deux piles : une carte est identifiée par le couple **(`deck`, `id`)**. Clé interne : `"movement:001"`, `"fuel:001"`.
 - `hints` : tableau de 1 à 3 textes, dans l'ordre de révélation. Le coût d'un indice est fixe (1 point) et n'est donc pas stocké par carte.
-- Valider le fichier **au démarrage** (couples deck/id uniques, id au format `^\d{3}$`, `deck` valide, 1 à 3 indices, `wrongPenalty` et `fuelReward` entiers 1–3, `fuelReward` présent pour toutes les cartes fuel) et faire planter le démarrage avec un message clair si invalide.
+- Valider le fichier **au démarrage** (couples deck/id uniques, id au format `^\d{3}$`, `deck` valide, 1 à 3 indices, `wrongPenalty` entier 1–3 sur toutes les cartes movement et absent des cartes fuel, `fuelReward` entier 1–3 sur toutes les cartes fuel et absent des cartes movement) et faire planter le démarrage avec un message clair si invalide.
 
 ### 5.2 Session — collection MongoDB `sessions`
 
@@ -296,11 +295,11 @@ Si une requête échoue : message non bloquant *"Connection problem, please try 
 
 Tests unitaires (`rules.test.js`) — au minimum :
 - [ ] La jauge démarre à 10.
-- [ ] Movement `correct` → jauge inchangée ; `wrong` → `-wrongPenalty`.
-- [ ] Fuel `correct` → `+fuelReward`, plafonné à 10.
+- [ ] Movement `correct` → `-1` ; `wrong` → `-wrongPenalty`.
+- [ ] Fuel `correct` → `+fuelReward`, plafonné à 10 ; `wrong` → jauge inchangée.
 - [ ] Chaque `hint` coûte exactement 1 point.
-- [ ] 3 `hint` puis `wrong` → jauge à `-3 - wrongPenalty` (bornée à 0).
-- [ ] `hint` ×N puis `correct` → seuls les N malus d'indice (et le gain fuel le cas échéant).
+- [ ] 3 `hint` puis `wrong` sur une carte Movement → jauge à `-3 - wrongPenalty` (bornée à 0).
+- [ ] `hint` ×N puis `correct` → les N malus d'indice, plus `-1` (Movement) ou `+fuelReward` (Fuel).
 - [ ] La jauge ne descend jamais sous 0 ; `appliedDelta` reflète le bornage.
 - [ ] 4e `hint` (ou au-delà du nombre d'indices de la carte) → refusé ; `hint` après réponse → refusé ; deuxième réponse → refusée.
 - [ ] Les cartes `movement:001` et `fuel:001` sont bien indépendantes.

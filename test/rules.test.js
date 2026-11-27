@@ -13,7 +13,7 @@ import {
 const NOW = new Date('2026-11-27T10:00:00Z');
 
 const movement = Object.freeze({ id: '001', deck: 'movement', hints: ['m1', 'm2', 'm3'], wrongPenalty: 2 });
-const fuel = Object.freeze({ id: '001', deck: 'fuel', hints: ['f1', 'f2', 'f3'], wrongPenalty: 1, fuelReward: 3 });
+const fuel = Object.freeze({ id: '001', deck: 'fuel', hints: ['f1', 'f2', 'f3'], fuelReward: 3 });
 const twoHints = Object.freeze({ id: '002', deck: 'movement', hints: ['a', 'b'], wrongPenalty: 1 });
 
 /** Applies a list of [card, type] actions, as the server would persist them. */
@@ -39,9 +39,15 @@ describe('gauge', () => {
     assert.equal(createSession({ id: 's1', name: 'T', now: NOW }).gauge, 10);
   });
 
-  test('movement correct leaves the gauge unchanged, wrong costs wrongPenalty', () => {
-    assert.equal(play(fresh(), [[movement, 'correct']]).gauge, 10);
+  test('movement correct costs 1, wrong costs wrongPenalty', () => {
+    assert.equal(play(fresh(), [[movement, 'correct']]).gauge, 9);
     assert.equal(play(fresh(), [[movement, 'wrong']]).gauge, 8);
+  });
+
+  test('fuel wrong changes nothing', () => {
+    const session = play(fresh(5), [[fuel, 'wrong']]);
+    assert.equal(session.gauge, 5);
+    assert.equal(session.events[0].appliedDelta, 0);
   });
 
   test('fuel correct adds fuelReward, capped at 10', () => {
@@ -63,9 +69,13 @@ describe('gauge', () => {
     assert.equal(play(fresh(4), [[movement, 'hint'], [movement, 'hint'], [movement, 'hint'], [movement, 'wrong']]).gauge, 0);
   });
 
-  test('N hints then correct: only the hint costs (plus the fuel reward)', () => {
-    assert.equal(play(fresh(), [[movement, 'hint'], [movement, 'hint'], [movement, 'correct']]).gauge, 8);
+  test('N hints then correct: hint costs plus the answer (movement -1, fuel +fuelReward)', () => {
+    assert.equal(play(fresh(), [[movement, 'hint'], [movement, 'hint'], [movement, 'correct']]).gauge, 7);
     assert.equal(play(fresh(5), [[fuel, 'hint'], [fuel, 'correct']]).gauge, 7);
+  });
+
+  test('N hints then a wrong fuel answer: only the hint costs', () => {
+    assert.equal(play(fresh(), [[fuel, 'hint'], [fuel, 'hint'], [fuel, 'wrong']]).gauge, 8);
   });
 
   test('never goes below 0 and appliedDelta reflects the clamping', () => {

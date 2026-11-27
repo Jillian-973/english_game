@@ -150,7 +150,7 @@
     "options": ["Change the element's color.", "Define the font family.", "Control what happens when content exceeds an element's box.", "Change the element's position."],
     "answer": "C",
     "hints": ["It manages content that does not fit.", "It can hide or display overflowing content.", "Common values include hidden, visible and auto."],
-    "wrongPenalty": 1, "fuelReward": 1
+    "fuelReward": 1
   },
   {
     "id": "017", "deck": "fuel", "level": "easy",
@@ -158,7 +158,7 @@
     "options": ["Change the mouse pointer's appearance.", "Change the text color.", "Move an element.", "Create an animation."],
     "answer": "A",
     "hints": ["It changes how the pointer looks.", "It can indicate that an element is clickable.", "A common value is pointer."],
-    "wrongPenalty": 1, "fuelReward": 1
+    "fuelReward": 1
   },
   {
     "id": "015", "deck": "fuel", "level": "medium",
@@ -166,7 +166,7 @@
     "options": ["Give an element a unique identifier.", "Change the element's background.", "Create a hyperlink automatically.", "Add a new HTML document."],
     "answer": "A",
     "hints": ["It is an HTML attribute.", "It helps identify a specific element.", "It should be unique within the document."],
-    "wrongPenalty": 2, "fuelReward": 2
+    "fuelReward": 2
   },
   {
     "id": "018", "deck": "fuel", "level": "medium",
@@ -174,7 +174,7 @@
     "options": ["Execute the script immediately before HTML parsing.", "Prevent the script from loading.", "Convert JavaScript into CSS.", "Download the script while parsing HTML and execute it after parsing finishes."],
     "answer": "D",
     "hints": ["It is used with the <script> element.", "It helps manage JavaScript loading.", "It allows the HTML document to be parsed before the script executes."],
-    "wrongPenalty": 2, "fuelReward": 2
+    "fuelReward": 2
   },
   {
     "id": "050", "deck": "fuel", "level": "hard",
@@ -182,7 +182,7 @@
     "options": ["Define a minimum and maximum size for a grid track.", "Calculate the average size of an image.", "Change the font size automatically.", "Hide grid columns."],
     "answer": "A",
     "hints": ["It is commonly used with CSS Grid.", "It defines a range of possible sizes.", "It can be used inside grid-template-columns."],
-    "wrongPenalty": 3, "fuelReward": 3
+    "fuelReward": 3
   },
   {
     "id": "036", "deck": "fuel", "level": "hard",
@@ -190,6 +190,6 @@
     "options": ["Change the font weight of all elements.", "Remove the default browser font.", "Create a text animation.", "Define and load a custom font for a website."],
     "answer": "D",
     "hints": ["It is related to typography.", "It allows developers to use external font files.", "It can define a font using formats such as WOFF or WOFF2."],
-    "wrongPenalty": 3, "fuelReward": 3
+    "fuelReward": 3
   }
 ]

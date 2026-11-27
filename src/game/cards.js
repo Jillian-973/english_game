@@ -42,9 +42,15 @@ function validateCard(card, index) {
     problems.push(`${where}: hints must contain 1 to ${MAX_HINTS} texts`);
   }
 
-  if (!isPoints(card.wrongPenalty)) problems.push(`${where}: wrongPenalty must be an integer from 1 to 3`);
-  if (card.deck === 'fuel' && !isPoints(card.fuelReward)) problems.push(`${where}: fuelReward must be an integer from 1 to 3`);
-  if (card.deck === 'movement' && card.fuelReward !== undefined) problems.push(`${where}: movement cards have no fuelReward`);
+  // Movement cards cost wrongPenalty on a wrong answer; fuel cards give fuelReward on a right answer.
+  if (card.deck === 'movement') {
+    if (!isPoints(card.wrongPenalty)) problems.push(`${where}: wrongPenalty must be an integer from 1 to 3`);
+    if (card.fuelReward !== undefined) problems.push(`${where}: movement cards have no fuelReward`);
+  }
+  if (card.deck === 'fuel') {
+    if (!isPoints(card.fuelReward)) problems.push(`${where}: fuelReward must be an integer from 1 to 3`);
+    if (card.wrongPenalty !== undefined) problems.push(`${where}: fuel cards have no wrongPenalty (a wrong answer costs nothing)`);
+  }
 
   return problems;
 }
