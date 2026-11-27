@@ -65,17 +65,20 @@
 
 /* Toast */
 .toast {
-  position: absolute;
-  left: 50%;
-  bottom: 28px;
-  z-index: 30;
+  position: fixed;
+  inset: auto auto 28px 50%;
+  width: max-content;
+  max-width: calc(min(100vw, var(--app-max-width)) - 2 * var(--gutter));
+  margin: 0;
+  border: 0;
+  color: var(--color-white);
   padding: 12px 18px;
   border-left: 4px solid var(--color-cyan);
   border-radius: var(--radius-md);
   background: var(--color-bg-dark);
   box-shadow: 0 8px 16px rgb(0 0 0 / 40%);
   font-size: var(--text-md);
-  white-space: nowrap;
+  text-align: center;
   opacity: 0;
   transform: translate(-50%, 20px);
   transition: opacity .2s, transform .2s;

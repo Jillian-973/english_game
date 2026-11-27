@@ -97,6 +97,25 @@
 .hints__label { color: var(--color-orange); }
 .hints__empty { margin-top: 10px; font-size: var(--text-sm); color: #7d8394; }
 
+.hint-btn {
+  position: relative;
+  z-index: 1;
+  min-height: 44px;
+  margin-top: 12px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--color-bg-game);
+  box-shadow: var(--shadow-btn);
+  font-size: var(--text-md);
+  color: var(--color-cyan);
+}
+.hint-btn__cost { font-size: var(--text-sm); color: var(--color-pink); }
+
+.answer__result { text-align: center; font-size: var(--text-lg); }
+.answer__result--correct { color: var(--color-green); }
+.answer__result--wrong { color: var(--color-pink); }
+
 .answer { margin: 10px 0 18px; text-align: center; font-size: var(--text-md); color: var(--color-orange); }
 .answer-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .answer-btn {

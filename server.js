@@ -7,15 +7,24 @@ import { createApp } from './src/app.js';
 import { loadCards } from './src/game/cards.js';
 import { getDb } from './src/db.js';
 import { MongoSessionStore } from './src/sessions/mongo-store.js';
+import { MemorySessionStore } from './src/sessions/memory-store.js';
 
 // Crashes at startup with a clear message if data/cards.json is invalid.
 const cards = loadCards(new URL('./data/cards.json', import.meta.url));
 
 const isMain = process.argv[1] === fileURLToPath(import.meta.url);
 
+function createStore() {
+  if (process.env.MONGODB_URI || !isMain) return new MongoSessionStore(getDb);
+
+  // Local convenience only: lets the app run before Atlas is configured.
+  console.warn('MONGODB_URI is not set: sessions are kept in memory and lost when the server stops.');
+  return new MemorySessionStore();
+}
+
 const app = createApp({
   cards,
-  store: new MongoSessionStore(getDb),
+  store: createStore(),
   // On Vercel, public/ is served by the CDN; locally Express serves the same files.
   staticDir: isMain ? fileURLToPath(new URL('./public', import.meta.url)) : undefined,
 });
